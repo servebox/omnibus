@@ -47,6 +47,7 @@ module Omnibus
       before do
         allow(subject).to receive(:packages).and_return(packages)
         Config.artifactory_base_path('com/getchef')
+        Config.publish_tries(1)
       end
 
       it 'validates the package' do
@@ -62,6 +63,20 @@ module Omnibus
         ).once
 
         subject.publish
+      end
+
+      context 'when upload fails', focus: true do
+        before do
+          Config.publish_tries(3)
+        end
+
+        it 'raises an exception' do
+          # This is not going through the retry loop
+          allow(artifact).to receive(:upload).and_raise('Artifactory:Error::HTTPError')
+
+          expect{ subject.publish }.to raise_error
+        end
+
       end
 
       context 'when an alternate platform and platform version are provided' do

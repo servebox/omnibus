@@ -32,6 +32,7 @@ module Omnibus
         log.info(log_key) { "Uploading '#{package.name}'" }
         tries = Config.publish_tries
         begin
+          puts "TRIES:  #{tries}"
           upload_time = Benchmark.realtime do
             artifact_for(package).upload(
               repository,
