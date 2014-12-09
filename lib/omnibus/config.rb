@@ -294,6 +294,21 @@ module Omnibus
     #
 
     #
+    # @!group Publisher
+    # --------------------------------------------------
+
+    # The number of times to try to publish an artifact
+    #
+    # @return [Integer]
+    default(:publish_tries) do
+      raise MissingRequiredAttribute.new(self, :publish_tries, 2)
+    end
+
+    # --------------------------------------------------
+    # @!endgroup
+    #
+
+    #
     # @!group Artifactory Publisher
     # --------------------------------------------------
 
