@@ -30,7 +30,7 @@ module Omnibus
 
         # Upload the actual package
         log.info(log_key) { "Uploading '#{package.name}'" }
-        tries = Config.publish_tries
+        retries = Config.publish_retries
         begin
           puts "TRIES:  #{tries}"
           upload_time = Benchmark.realtime do

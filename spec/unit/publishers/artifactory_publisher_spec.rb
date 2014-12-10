@@ -47,7 +47,7 @@ module Omnibus
       before do
         allow(subject).to receive(:packages).and_return(packages)
         Config.artifactory_base_path('com/getchef')
-        Config.publish_tries(1)
+        Config.publish_retries(1)
       end
 
       it 'validates the package' do
@@ -67,7 +67,7 @@ module Omnibus
 
       context 'when upload fails', focus: true do
         before do
-          Config.publish_tries(3)
+          Config.publish_retries(3)
         end
 
         it 'raises an exception' do

@@ -300,8 +300,8 @@ module Omnibus
     # The number of times to try to publish an artifact
     #
     # @return [Integer]
-    default(:publish_tries) do
-      raise MissingRequiredAttribute.new(self, :publish_tries, 2)
+    default(:publish_retries) do
+      raise MissingRequiredAttribute.new(self, :publish_retries, 2)
     end
 
     # --------------------------------------------------
